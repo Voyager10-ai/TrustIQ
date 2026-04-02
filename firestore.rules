@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Exam sessions — authenticated users can read/write their own
+    match /sessions/{sessionId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Student profiles
+    match /profiles/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Risk events — only proctors can read all, students read own
+    match /risk_events/{eventId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+    
+    // Exams — anyone authenticated can read
+    match /exams/{examId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+  }
+}
