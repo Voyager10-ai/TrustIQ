@@ -15,6 +15,7 @@ Usage:
 """
 
 import uvicorn
+import os
 from backend.config import settings
 
 
@@ -27,11 +28,16 @@ def main():
     ╚══════════════════════════════════════════════════╝
     """)
     
+    # Railway (and other cloud hosts) inject PORT via environment variable
+    # Fall back to settings.PORT (8000) for local development
+    port = int(os.environ.get("PORT", settings.PORT))
+    reload = settings.DEBUG and port == settings.PORT  # No reload in production
+
     uvicorn.run(
         "backend.app:app",
-        host=settings.HOST,
-        port=settings.PORT,
-        reload=settings.DEBUG,
+        host="0.0.0.0",
+        port=port,
+        reload=reload,
         log_level="info",
     )
 

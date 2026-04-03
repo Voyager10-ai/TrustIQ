@@ -31,5 +31,5 @@ COPY . .
 # Expose port
 EXPOSE 8000
 
-# Start the server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start the server (PORT is injected by Railway as an env var)
+CMD ["python", "main.py"]
