@@ -2,7 +2,9 @@
 
 import { useState, useRef, useCallback, useEffect, useMemo } from 'react'
 
-export default function useExamWebSocket({ sessionId, backendUrl = 'ws://localhost:8000' }) {
+const DEFAULT_WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:8000'
+
+export default function useExamWebSocket({ sessionId, backendUrl = DEFAULT_WS_URL }) {
     const [isConnected, setIsConnected] = useState(false)
     const [riskData, setRiskData] = useState(null)
     const [lastError, setLastError] = useState(null)
