@@ -32,4 +32,4 @@ COPY . .
 EXPOSE 8000
 
 # Start the server (PORT is injected by Railway as an env var)
-CMD ["python", "main.py"]
+CMD uvicorn backend.app:app --host 0.0.0.0 --port $PORT
