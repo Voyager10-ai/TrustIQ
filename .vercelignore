@@ -1,0 +1,19 @@
+# Ignore backend files so Vercel doesn't mistakenly build Python
+main.py
+requirements.txt
+runtime.txt
+Procfile
+Dockerfile
+railway.toml
+yolov8n.pt
+.python-version
+
+# Ignore backend directories
+backend/
+models/
+risk_engine/
+utils/
+datasets/
+docs/
+venv/
+.venv/
