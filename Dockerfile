@@ -28,8 +28,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy app source code
 COPY . .
 
-# Expose port
-EXPOSE 8000
-
 # Start the server (PORT is injected by Railway as an env var)
 CMD ["python", "main.py"]
