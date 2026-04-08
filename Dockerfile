@@ -28,5 +28,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy app source code
 COPY . .
 
-# Start the server (PORT is injected by Railway as an env var)
-CMD ["python", "main.py"]
+# Explicitly expose port 8000 so Railway's proxy natively binds here
+EXPOSE 8000
+
+# Force Uvicorn safely on 8000 (bypassing any main.py or $PORT environment bugs)
+CMD ["uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "8000"]
