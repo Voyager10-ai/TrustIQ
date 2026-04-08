@@ -37,7 +37,7 @@ def main():
         "backend.app:app",
         host="0.0.0.0",
         port=port,
-        reload=reload,
+        reload=False,
         log_level="info",
     )
 
